@@ -12,10 +12,11 @@
 
 #include <unistd.h>
 #include "header.h"
+
 int	main(int argc, char **argv)
 {
-	int	valeurs[16]; //les indices de visibilite, les argu, correspondant a col1up etc
-	int	grille[4][4]; 
+	int	valeurs[16];
+	int	grille[4][4];
 	int	i;
 	int	i2;
 	int	l;
@@ -52,6 +53,7 @@ int	main(int argc, char **argv)
 		write(1, "Error\n", 6);
 		return (0);
 	}
+	// Initialisation de la grille à 0
 	l = 0;
 	while (l < 4)
 	{
@@ -62,5 +64,11 @@ int	main(int argc, char **argv)
 			c++;
 		}
 		l++;
-	} //ini toutes grilles a 0 pour eviter valeur aleatoire et dysfonctionnement
-
+	}
+	// Résolution du puzzle
+	if (solve(grille, valeurs))
+		ft_print_grid(grille, valeurs);
+	else
+		write(1, "Error\n", 6);
+	return (0);
+}
