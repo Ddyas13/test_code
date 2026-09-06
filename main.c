@@ -1,4 +1,4 @@
-X /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -53,7 +53,6 @@ int	main(int argc, char **argv)
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	// Initialisation de la grille à 0
 	l = 0;
 	while (l < 4)
 	{
@@ -65,10 +64,8 @@ int	main(int argc, char **argv)
 		}
 		l++;
 	}
-	// Résolution du puzzle
-	if (solve(grille, valeurs))
-		ft_print_grid(grille, valeurs);
-	else
-		write(1, "Error\n", 6);
+	// Ici il faudra ajouter la logique de résolution
+	// Pour l'instant on affiche juste la grille vide
+	ft_print_grid(grille, valeurs);
 	return (0);
 }
