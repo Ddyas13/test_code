@@ -1,38 +1,96 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_print.c                                      :+:      :+:    :+:   */
+/*   print_std.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyassire <dyassire@learner.42.tech>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/06 15:05:25 by dyassire          #+#    #+#             */
-/*   Updated: 2026/09/06 17:46:01 by dyassire         ###   ########.fr       */
+/*   Created: 2026/09/06 10:59:27 by dyassire          #+#    #+#             */
+/*   Updated: 2026/09/06 17:45:18 by dyassire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "header.h"
 
-int	valid_print(int l, int c, int grille[4][4])
+void	ft_putchar(char c)
 {
-	int	i;
+	write(1, &c, 1);
+}
 
-	i = 0;
-	while (i < 4)
+void	ft_putnbr(int nb)
+{
+	if (nb >= 10)
 	{
-		if (i != c && grille[l][i] == grille[l][c] && grille[l][c] != 0)
-		{
-			return (0);
-		}
-		i++;
+		ft_putnbr(nb / 10);
 	}
-	i = 0;
-	while (i < 4)
+	ft_putchar((nb % 10) + '0');
+}
+
+void	ft_putstr(char *str)
+{
+	while (*str != '\0')
 	{
-		if (i != l && grille[i][c] == grille[l][c] && grille[l][c] != 0)
-		{
-			return (0);
-		}
-		i++;
+		ft_putchar(*str);
+		str++;
 	}
-	return (1);
+}
+
+void	ft_print_border(void)
+{
+	int	c;
+
+	ft_putstr("+");
+	c = 0;
+	while (c < 4)
+	{
+		ft_putstr("---+");
+		c++;
+	}
+	ft_putchar('\n');
+}
+
+void	ft_print_grid(int grille[4][4], int valeurs[16])
+{
+	int	l;
+	int	c;
+
+	ft_putstr("  ");
+	c = 0;
+	while (c < 4)
+	{
+		ft_putchar(' ');
+		ft_putnbr(valeurs[c]);
+		ft_putchar(' ');
+		c++;
+	}
+	ft_putchar('\n');
+	ft_print_border();
+	l = 0;
+	while (l < 4)
+	{
+		ft_putnbr(valeurs[8 + l]);
+		ft_putstr(" | ");
+		c = 0;
+		while (c < 4)
+		{
+			ft_putnbr(grille[l][c]);
+			ft_putstr(" | ");
+			c++;
+		}
+		ft_putnbr(valeurs[12 + l]);
+		ft_putchar('\n');
+		ft_print_border();
+		l++;
+	}
+	ft_putstr("  ");
+	c = 0;
+	while (c < 4)
+	{
+		ft_putchar(' ');
+		ft_putnbr(valeurs[4 + c]);
+		ft_putchar(' ');
+		c++;
+	}
+	ft_putchar('\n');
 }
